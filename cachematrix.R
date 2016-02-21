@@ -40,30 +40,3 @@ cacheSolve <- function(x, ...) {
   x$setsolve(m)
   m
 }
-
-#This third function demonstrates another way to attack the same problem using only just one function
-customCache <- function(x = matrix()) {
-  
-  if (exists("cachedResult")){        #check that we have run this function before
-    if (identical(x, cachedInput)){   #check the input operand hasn't changed from last time
-      message("getting cached data")
-      return(cachedResult)            
-    }
-  }
-  message("new operand, recalculating")
-  cachedInput <<- x
-  cachedResult <<- solve(x)
-  return(cachedResult)
-}
-
-# Testing the requested solution:
-test <- matrix(1:4,nrow=2,ncol=2)
-testC <- makeCacheMatrix(test)
-
-message("inital run:")
-result <-cacheSolve(testC)
-print(result)
-
-message("second run:")
-result <-cacheSolve(testC)
-print(result)
